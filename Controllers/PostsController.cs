@@ -9,7 +9,7 @@ namespace Aflevering_Del1.Controllers;
 
 //[Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class PostsController
 {
     private readonly IPostService _postService;
@@ -25,11 +25,22 @@ public class PostsController
     {
         return await _postService.GetPosts();
     }
+    [HttpGet("{id}")]
+    public async Task<Post> GetPost(int id)
+    {
+        return await _postService.GetPost(id);
+    }
     
     [HttpPost]
     public async Task CreatePost(PostDto post)
     {
         await _postService.CreatePost(post);
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task DeletePost(int id)
+    {
+        await _postService.DeletePost(id);
     }
     
 }

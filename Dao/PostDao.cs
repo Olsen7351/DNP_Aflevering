@@ -37,6 +37,37 @@ public class PostDao: IPostDao
             throw new PostListNotFound("Post not found");
         }
     }
+    public async Task<Post> GetPost(int id)
+    {
+        var post = Posts.Find(p => p.Id == id);
+        if (post != null)
+        {
+            return await Task.FromResult(post);
+        }
+        else
+        {
+            throw new PostNotFoundException("Post not found");
+        }
+    }
+
+    public Task DeletePost(int id)
+    {
+        if (id <0)
+        {
+            throw new InvalidDataException("Post ID is invalid");
+        }
+        var post = Posts.Find(p => p.Id == id);
+        if (post != null)
+        {
+            Posts.Remove(post);
+            SaveChanges();
+        }
+        else
+        {
+            throw new PostNotFoundException("Post not found");
+        }
+        return Task.CompletedTask;
+    }
 
     public Task CreatePost(PostDto post)
     {

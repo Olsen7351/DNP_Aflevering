@@ -12,7 +12,20 @@ public class PostService : IPostService
     {
         PostDao = postDao;
     }
-
+    public Task<Post> GetPost(int id)
+    {
+        return PostDao.GetPost(id);
+    }
+    public Task DeletePost(int id)
+    {
+        if (id <0)
+        {
+            throw new NullReferenceException();
+        }
+        
+        PostDao.DeletePost(id);
+        return Task.CompletedTask;
+    }
 
     public Task<IEnumerable<Post>> GetPosts()
     {

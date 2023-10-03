@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aflevering_Del1", "Afleveri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{B21C86F0-F726-404A-B374-4FDB5FA01A3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aflevering_Frontend", "..\Aflevering_Frontend\Aflevering_Frontend.csproj", "{C043C23A-D0AD-4486-B0E6-3D4354A13109}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{B21C86F0-F726-404A-B374-4FDB5FA01A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B21C86F0-F726-404A-B374-4FDB5FA01A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B21C86F0-F726-404A-B374-4FDB5FA01A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
