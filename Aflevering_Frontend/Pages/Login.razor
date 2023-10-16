@@ -1,0 +1,54 @@
+@page "/Login"
+@using Aflevering_Frontend.Services.Auth
+@using Aflevering_Frontend.Pages.Components
+@inject IAuthService authService
+@inject NavigationManager navMgr
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div>
+            <h3>Login</h3>
+            <div>
+                <label>User name:</label>
+                <input type="text" @bind="userName" />
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" @bind="password" />
+            </div>
+            @if (!string.IsNullOrEmpty(errorLabel))
+            {
+                <div>
+                    <label>@errorLabel</label>
+                </div>
+            }
+            <div>
+                <button
+                    @onclick="LoginAsync">Log in</button>
+            </div>
+        </div>
+        <Register />
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    private string userName;
+    private string password;
+    private string errorLabel;
+
+    private async Task LoginAsync()
+    {
+        errorLabel = "";
+        try
+        {
+            await authService.LoginAsync(userName, password);
+            navMgr.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            errorLabel = $"Error: {e.Message}";
+        }
+    }
+}

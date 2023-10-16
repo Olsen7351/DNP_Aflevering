@@ -1,0 +1,69 @@
+@using global::Shared
+@using Microsoft.AspNetCore.Authorization
+@using Aflevering_Frontend.Services.Auth
+@inject IJSRuntime JsRuntime
+@inject IAuthService AuthService
+
+<h3>User Registration</h3>
+
+<EditForm Model="@_user" OnValidSubmit="RegisterUser">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <label for="Username">Username</label>
+        <input id="Username" @bind="@_user.Username" class="form-control" />
+        <ValidationMessage For="@(() => _user.Username)" />
+    </div>
+
+    <div class="form-group">
+        <label for="Password">Password</label>
+        <input id="Password" @bind="@_user.Password" type="password" class="form-control" />
+        <ValidationMessage For="@(() => _user.Password)" />
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input id="Email" @bind="@_user.Email" class="form-control" />
+        <ValidationMessage For="@(() => _user.Email)" />
+    </div>
+
+    <div class="form-group">
+        <label for="Domain">Domain</label>
+        <input id="Domain" @bind="@_user.Domain" class="form-control" />
+        <ValidationMessage For="@(() => _user.Domain)" />
+    </div>
+    <div class="form-group">
+        <label for="SecurityLevel">Securitylevel</label>
+        <input id="SecurityLevel" @bind="@_user.SecurityLevel" class="form-control" />
+        <ValidationMessage For="@(() => _user.SecurityLevel)" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Register</button>
+    </div>
+</EditForm>
+
+
+@code {
+    private User _user = new User();
+
+    private async Task RegisterUser()
+    {
+        try
+        {
+            //Role default User
+            _user.Role = Role.User;
+            //SecurityLevel default 1
+            _user.SecurityLevel = 1;
+            
+            AuthService.RegisterAsync(_user);
+            await JsRuntime.InvokeVoidAsync("alert", "User registered successfully!");
+            //Reset all fields
+            _user = new User();
+        }
+        catch (Exception e)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Registration failed: " + e.Message);
+        }
+    }
+}

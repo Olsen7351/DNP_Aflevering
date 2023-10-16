@@ -1,0 +1,43 @@
+@page "/posts/{postId:int}"
+@using Frontend_Blazor.Services
+@using global::Shared
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<h3>Post Details</h3>
+
+@if (post != null)
+{
+    <h4>@post.Header</h4>
+    <p>@post.Body</p>
+    <small class="text-muted">Created at: @post.CreatedAt</small>
+}
+else
+{
+    <p>Post not found.</p>
+}
+
+<button class="btn btn-danger" @onclick="DeletePost">Delete</button>
+
+@code {
+    [Parameter]
+    public int postId { get; set; }
+
+    private Post post;
+
+    [Inject]
+    private IPostService PostService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await PostService.GetPost(postId);
+        post = response;
+    }
+
+    private async Task DeletePost()
+    {
+        await PostService.DeletePost(post.Id);
+    // Redirect to the main posts page after deleting
+        NavigationManager.NavigateTo("/posts");
+    }
+}

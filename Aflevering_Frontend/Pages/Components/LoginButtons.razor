@@ -1,0 +1,36 @@
+@using Aflevering_Frontend.Services.Auth
+@namespace Aflevering_Frontend.Pages.Components
+@inject NavigationManager NavMgr
+@inject IAuthService AuthService
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <button @onclick="Logout">
+                <img src="img/Logout.png" width="20px" alt="Logout" />
+            </button>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="loginbtn">
+            <button @onclick="Login">
+                <img src="img/Login.png" width="20px" alt="Login" />
+            </button>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+
+    private void Login()
+    {
+        NavMgr.NavigateTo("/Login");
+    }
+
+    private async Task Logout()
+    {
+        await AuthService.LogoutAsync();
+        NavMgr.NavigateTo("/");
+    }
+
+}

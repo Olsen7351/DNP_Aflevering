@@ -32,7 +32,6 @@ public class AuthController : ControllerBase
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim("DisplayName", user.Name),
             new Claim("Email", user.Email),
         };
         return claims.ToList();
@@ -92,7 +91,9 @@ public class AuthController : ControllerBase
                 Username = userRegistration.Username,
                 Password = userRegistration.Password,
                 Email = userRegistration.Email,
-                Name = userRegistration.Name
+                Role = userRegistration.Role,
+                SecurityLevel = 1,
+                Domain = userRegistration.Domain
             };
 
             // Call your registration service to add the user to the database

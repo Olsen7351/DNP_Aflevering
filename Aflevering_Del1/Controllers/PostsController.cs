@@ -7,7 +7,7 @@ using Shared.Dto;
 
 namespace Aflevering_Del1.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PostsController
