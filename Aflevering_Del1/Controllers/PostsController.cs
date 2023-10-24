@@ -42,5 +42,11 @@ public class PostsController
     {
         await _postService.DeletePost(id);
     }
+
+    [HttpPost]
+    public async Task UpdatePost(Post post)
+    {
+        await _postService.UpdatePost(post);
+    }
     
 }

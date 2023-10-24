@@ -1,7 +1,10 @@
 @page "/posts/{postId:int}"
 @using Frontend_Blazor.Services
 @using global::Shared
+@using Services.Auth
 @inject NavigationManager NavigationManager
+@inject IAuthService authService
+@using System.Security.Claims
 @attribute [Authorize]
 
 <h3>Post Details</h3>
@@ -11,19 +14,40 @@
     <h4>@post.Header</h4>
     <p>@post.Body</p>
     <small class="text-muted">Created at: @post.CreatedAt</small>
+    <div>
+    <!-- Display Sub-Comments -->
+    @if (post.SubComments != null && post.SubComments.Any())
+    {
+        <h4>Sub-Comments</h4>
+        <ul>
+            @foreach (var subComment in post.SubComments)
+            {
+                <li>
+                    <strong>@subComment.Author:</strong> @subComment.Text
+                    <button class="btn btn-link" @onclick="() => RemoveSubComment(subComment)">Remove</button>
+                </li>
+            }
+        </ul>
+    }
+    </div>
+    <!-- Add Sub-Comment -->
+    <input type="text" @bind="newSubCommentText" placeholder="Add a sub-comment" />
+    <button class="btn btn-primary" @onclick="AddSubComment">Add Sub-Comment</button>
+
+    <button class="btn btn-danger" @onclick="DeletePost">Delete</button>
 }
 else
 {
     <p>Post not found.</p>
 }
 
-<button class="btn btn-danger" @onclick="DeletePost">Delete</button>
-
 @code {
     [Parameter]
     public int postId { get; set; }
 
     private Post post;
+    private string newSubCommentText;
+    private ClaimsPrincipal user;
 
     [Inject]
     private IPostService PostService { get; set; }
@@ -31,13 +55,42 @@ else
     protected override async Task OnInitializedAsync()
     {
         var response = await PostService.GetPost(postId);
+        user = await authService.GetAuthAsync();
         post = response;
     }
 
     private async Task DeletePost()
     {
         await PostService.DeletePost(post.Id);
-    // Redirect to the main posts page after deleting
+        // Redirect to the main posts page after deleting
         NavigationManager.NavigateTo("/posts");
+    }
+
+    private void AddSubComment()
+    {
+        if (!string.IsNullOrWhiteSpace(newSubCommentText))
+        {
+            if (post.SubComments == null)
+                post.SubComments = new List<SubComment>();
+
+            post.SubComments.Add(new SubComment
+                {
+                    Text = newSubCommentText,
+                    Author = user.Identity.Name, // Replace with actual username
+                    CreatedAt = DateTime.Now
+                });
+
+            newSubCommentText = ""; // Clear the input field
+        }
+    }
+
+    private void RemoveSubComment(SubComment subComment)
+    {
+        if (post.SubComments != null)
+            post.SubComments.Remove(subComment);
+    }
+    private void UpdatePost()
+    {
+        PostService.UpdatePost(post);
     }
 }

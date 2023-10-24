@@ -5,12 +5,12 @@ using Shared.Dto;
 
 namespace Aflevering_Del1.Dao;
 
-public class PostDao: IPostDao
+public class PostDao : IPostDao
 {
     private readonly string PostFilePath; // Path to the JSON file for storing Posts
     private List<Post>? Posts;
     private int PostID;
-    
+
     public PostDao()
     {
         PostFilePath = Path.Combine(Environment.CurrentDirectory, "../Resource/posts.json");
@@ -52,7 +52,7 @@ public class PostDao: IPostDao
 
     public Task DeletePost(int id)
     {
-        if (id <0)
+        if (id < 0)
         {
             throw new InvalidDataException("Post ID is invalid");
         }
@@ -79,12 +79,12 @@ public class PostDao: IPostDao
         try
         {
             //If post ID already exists +1 to the ID
-            while (Posts.Any(p=>p.Id == PostID))
+            while (Posts.Any(p => p.Id == PostID))
             {
                 PostID++;
             }
 
-            Post NewPost = new Post(Posts.Count,post.Header, post.Body,post.CreatedAt);
+            Post NewPost = new Post(Posts.Count, post.Header, post.Body, post.CreatedAt);
             Posts.Add(NewPost);
             SaveChanges();
         }
@@ -95,7 +95,27 @@ public class PostDao: IPostDao
 
         return Task.CompletedTask;
     }
-    
+    public Task UpdatePost(PostDto post)
+    {
+        if (post == null)
+        {
+            throw new InvalidDataException("Post is null");
+        }
+        var postToUpdate = Posts.Find(p => p.Id == post.Id);
+        if (postToUpdate != null)
+        {
+            postToUpdate.Header = post.Header;
+            postToUpdate.Body = post.Body;
+            postToUpdate.CreatedAt = post.CreatedAt;
+            SaveChanges();
+        }
+        else
+        {
+            throw new PostNotFoundException("Post not found");
+        }
+        return Task.CompletedTask;
+    }
+
     private void SaveChanges()
     {
         string jsonData = JsonSerializer.Serialize(Posts);

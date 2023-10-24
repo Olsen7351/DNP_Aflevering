@@ -36,7 +36,7 @@ public class PostService : IPostService
         {
             throw new NullReferenceException("Posts was not found");
         }
-    }   
+    }
 
     public async Task<Post?> GetPost(int id)
     {
@@ -55,11 +55,33 @@ public class PostService : IPostService
     public async Task CreatePost(PostDto post)
     {
         var responseMessage = await _httpClient.PostAsJsonAsync("api/Posts", post);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var postResponse = responseMessage.Content.ReadFromJsonAsync<Post>();
+            return Task.FromResult(postResponse).Result.Result;
+        }
+        else
+        {
+            throw new NullReferenceException("Post was not Created");
+        }
     }
 
     public async Task DeletePost(int id)
     {
         await _httpClient.DeleteAsync("api/Posts/" + id);
     }
-    
+    public async Task UpdatePost(PostService post)
+    {
+        var responseMessage = await _httpClient.PutAsJsonAsync("api/Posts/" + post.Id, post);
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var postResponse = responseMessage.Content.ReadFromJsonAsync<Post>();
+            return Task.FromResult(postResponse).Result.Result;
+        }
+        else
+        {
+            throw new NullReferenceException("Post was not found");
+        }
+    }
+
 }

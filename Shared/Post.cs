@@ -15,6 +15,7 @@ public class Post
     
     [Required]
     public DateTime CreatedAt { get; set; }
+    public List<SubComment> SubComments { get; set; }
 
     public Post(int id, string header, string body, DateTime createdAt)
     {
@@ -22,5 +23,6 @@ public class Post
         Header = header;
         Body = body;
         CreatedAt = createdAt;
+        SubComments = new List<SubComment>();
     }
 }

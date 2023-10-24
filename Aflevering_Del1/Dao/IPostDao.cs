@@ -9,4 +9,5 @@ public interface IPostDao
     Task<Post> GetPost(int id);
     Task CreatePost(PostDto post);
     Task DeletePost(int id);
+    Task UpdatePost(Post post);
 }
