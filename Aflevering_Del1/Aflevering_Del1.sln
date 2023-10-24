@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aflevering_Del1", "Aflevering_Del1.csproj", "{640338BB-0385-43BB-9C9F-52F7E125C9B5}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aflevering_Del1", "Aflevering_Del1.csproj", "{640338BB-0385-43BB-9C9F-52F7E125C9B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{B21C86F0-F726-404A-B374-4FDB5FA01A3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "..\Shared\Shared.csproj", "{B21C86F0-F726-404A-B374-4FDB5FA01A3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aflevering_Frontend", "..\Aflevering_Frontend\Aflevering_Frontend.csproj", "{C043C23A-D0AD-4486-B0E6-3D4354A13109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aflevering_Frontend", "..\Aflevering_Frontend\Aflevering_Frontend.csproj", "{C043C23A-D0AD-4486-B0E6-3D4354A13109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,8 @@ Global
 		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C043C23A-D0AD-4486-B0E6-3D4354A13109}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
