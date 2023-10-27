@@ -57,8 +57,8 @@ public class PostService : IPostService
         var responseMessage = await _httpClient.PostAsJsonAsync("api/Posts", post);
         if (responseMessage.IsSuccessStatusCode)
         {
-            var postResponse = responseMessage.Content.ReadFromJsonAsync<Post>();
-            return Task.FromResult(postResponse).Result.Result;
+           
+                var response =await responseMessage.Content.ReadFromJsonAsync<Post>();
         }
         else
         {
@@ -70,13 +70,12 @@ public class PostService : IPostService
     {
         await _httpClient.DeleteAsync("api/Posts/" + id);
     }
-    public async Task UpdatePost(PostService post)
+    public async Task UpdatePost(Post post)
     {
-        var responseMessage = await _httpClient.PutAsJsonAsync("api/Posts/" + post.Id, post);
+        var responseMessage = await _httpClient.PostAsJsonAsync("api/Posts/Update", post);
         if (responseMessage.IsSuccessStatusCode)
         {
             var postResponse = responseMessage.Content.ReadFromJsonAsync<Post>();
-            return Task.FromResult(postResponse).Result.Result;
         }
         else
         {

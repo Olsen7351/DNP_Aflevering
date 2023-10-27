@@ -16,13 +16,13 @@ public class PostService : IPostService
     {
         return PostDao.GetPost(id);
     }
-    public Task<Post> UpdatePost(Post post)
+    public async Task UpdatePost(Post post)
     {
         if (post == null)
         {
             throw new NullReferenceException();
         }
-        return PostDao.UpdatePost(post);
+        await PostDao.UpdatePost(post);
     }
     public Task DeletePost(int id)
     {

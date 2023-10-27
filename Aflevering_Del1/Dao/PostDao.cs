@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Aflevering_Del1.Exceptions;
+using Microsoft.IdentityModel.Tokens;
 using Shared;
 using Shared.Dto;
 
@@ -95,18 +96,17 @@ public class PostDao : IPostDao
 
         return Task.CompletedTask;
     }
-    public Task UpdatePost(PostDto post)
+    public Task UpdatePost(Post post)
     {
-        if (post == null)
+        if (post.Equals(null) || Posts.IsNullOrEmpty())
         {
             throw new InvalidDataException("Post is null");
         }
-        var postToUpdate = Posts.Find(p => p.Id == post.Id);
+        int id = post.Id;
+        Post postToUpdate = Posts.Find(post => post.Id.Equals(id));
         if (postToUpdate != null)
         {
-            postToUpdate.Header = post.Header;
-            postToUpdate.Body = post.Body;
-            postToUpdate.CreatedAt = post.CreatedAt;
+            postToUpdate.SubComments = post.SubComments;
             SaveChanges();
         }
         else

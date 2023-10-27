@@ -70,24 +70,27 @@ else
     {
         if (!string.IsNullOrWhiteSpace(newSubCommentText))
         {
-            if (post.SubComments == null)
+            if (post.SubComments == null) {
                 post.SubComments = new List<SubComment>();
-
+            }
             post.SubComments.Add(new SubComment
                 {
                     Text = newSubCommentText,
                     Author = user.Identity.Name, // Replace with actual username
                     CreatedAt = DateTime.Now
                 });
-
+            UpdatePost();
             newSubCommentText = ""; // Clear the input field
         }
+
     }
 
     private void RemoveSubComment(SubComment subComment)
     {
         if (post.SubComments != null)
             post.SubComments.Remove(subComment);
+
+        UpdatePost();
     }
     private void UpdatePost()
     {

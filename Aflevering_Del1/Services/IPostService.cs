@@ -7,7 +7,7 @@ public interface IPostService
 {
     Task<IEnumerable<Post>> GetPosts();
     Task<Post> GetPost(int id);
-    Task<Post> UpdatePost(Post post);
+    Task UpdatePost(Post post);
     Task CreatePost(PostDto post);
     Task DeletePost(int id);
 }
