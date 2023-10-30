@@ -1,0 +1,9 @@
+@startuml
+class SubComment {
+    + Id : int <<get>> <<set>>
+    + PostId : int <<get>> <<set>>
+    + Text : string <<get>> <<set>>
+    + Author : string <<get>> <<set>>
+}
+SubComment --> "CreatedAt" DateTime
+@enduml

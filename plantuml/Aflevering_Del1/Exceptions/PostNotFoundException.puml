@@ -1,0 +1,7 @@
+@startuml
+class PostNotFoundException {
+    + PostNotFoundException()
+    + PostNotFoundException(message:string)
+}
+Exception <|-- PostNotFoundException
+@enduml

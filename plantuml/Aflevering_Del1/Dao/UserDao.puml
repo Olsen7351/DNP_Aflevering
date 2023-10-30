@@ -1,0 +1,8 @@
+@startuml
+class UserDao {
+    + UserDao()
+    + <<async>> GetUser(username:string, password:string) : Task<User>
+    + RegisterUser(user:User) : Task
+}
+IUserDao <|-- UserDao
+@enduml

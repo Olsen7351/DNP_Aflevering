@@ -1,0 +1,15 @@
+@startuml
+class JwtAuthService {
+    + JwtAuthService(httpClient:HttpClient)
+    + {static} Jwt : string? <<get>> = ""
+    + {static} Username : string <<get>> = ""
+    + <<async>> LoginAsync(username:string, password:string) : Task
+    + LogoutAsync() : Task
+    + <<async>> RegisterAsync(user:User) : Task
+    + GetAuthAsync() : Task<ClaimsPrincipal>
+}
+class "Action`1"<T> {
+}
+IAuthService <|-- JwtAuthService
+JwtAuthService o-> "OnAuthStateChanged<ClaimsPrincipal>" "Action`1"
+@enduml

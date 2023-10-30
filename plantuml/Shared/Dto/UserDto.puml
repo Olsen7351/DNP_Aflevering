@@ -1,0 +1,6 @@
+@startuml
+class UserDto {
+    + Username : string <<get>> <<init>>
+    + Password : string <<get>> <<init>>
+}
+@enduml

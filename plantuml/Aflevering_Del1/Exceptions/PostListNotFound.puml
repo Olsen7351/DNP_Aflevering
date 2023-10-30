@@ -1,0 +1,7 @@
+@startuml
+class PostListNotFound {
+    + PostListNotFound()
+    + PostListNotFound(message:string)
+}
+Exception <|-- PostListNotFound
+@enduml

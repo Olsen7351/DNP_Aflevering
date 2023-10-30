@@ -1,0 +1,12 @@
+@startuml
+class Post {
+    + Id : int <<get>> <<set>>
+    + Header : string <<get>> <<set>>
+    + Body : string <<get>> <<set>>
+    + Post(id:int, header:string, body:string, createdAt:DateTime)
+}
+class "List`1"<T> {
+}
+Post --> "CreatedAt" DateTime
+Post --> "SubComments<SubComment>" "List`1"
+@enduml

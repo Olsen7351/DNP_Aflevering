@@ -1,0 +1,7 @@
+@startuml
+class PostDto {
+    + Header : string <<get>> <<set>>
+    + Body : string <<get>> <<set>>
+}
+PostDto o-> "CreatedAt" DateTime
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+class PostService {
+    + PostService(postDao:IPostDao)
+    + GetPost(id:int) : Task<Post>
+    + <<async>> UpdatePost(post:Post) : Task
+    + DeletePost(id:int) : Task
+    + GetPosts() : Task<IEnumerable<Post>>
+    + CreatePost(post:PostDto) : Task
+}
+IPostService <|-- PostService
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class PostsController {
+    + PostsController(postService:IPostService)
+    + <<async>> GetPosts() : Task<IEnumerable<Post>>
+    + <<async>> GetPost(id:int) : Task<Post>
+    + <<async>> CreatePost(post:PostDto) : Task
+    + <<async>> DeletePost(id:int) : Task
+    + <<async>> UpdatePost(post:Post) : Task
+}
+@enduml

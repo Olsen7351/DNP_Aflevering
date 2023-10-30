@@ -1,0 +1,7 @@
+@startuml
+class PostNotSaved {
+    + PostNotSaved()
+    + PostNotSaved(message:string)
+}
+Exception <|-- PostNotSaved
+@enduml

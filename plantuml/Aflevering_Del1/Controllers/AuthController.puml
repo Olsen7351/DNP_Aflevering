@@ -1,0 +1,8 @@
+@startuml
+class AuthController {
+    + AuthController(config:IConfiguration, authService:IAuthService)
+    + <<async>> Login(userLoginDto:UserDto) : Task<ActionResult>
+    + <<async>> RegisterUser(userRegistration:User) : Task<ActionResult>
+}
+ControllerBase <|-- AuthController
+@enduml
