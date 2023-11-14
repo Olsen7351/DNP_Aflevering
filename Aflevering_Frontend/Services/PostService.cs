@@ -52,15 +52,12 @@ public class PostService : IPostService
         }
     }
 
-    public async Task CreatePost(PostDto post)
+    public async Task CreatePost(PostDto postDto)
     {
+        Post post = new Post(0,postDto.Header,postDto.Body,postDto.CreatedAt);
+        
         var responseMessage = await _httpClient.PostAsJsonAsync("api/Posts", post);
-        if (responseMessage.IsSuccessStatusCode)
-        {
-           
-                var response =await responseMessage.Content.ReadFromJsonAsync<Post>();
-        }
-        else
+        if (!responseMessage.IsSuccessStatusCode)
         {
             throw new NullReferenceException("Post was not Created");
         }

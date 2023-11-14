@@ -4,6 +4,7 @@
 @using global::Shared.Dto
 @using Microsoft.AspNetCore.Authorization
 @inject IPostService PostService
+@inject IJSRuntime JsRuntime
 @attribute [Authorize]
 
 <PageTitle>Counter</PageTitle>
@@ -44,10 +45,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await PostService.GetPosts();
-        var enumerable = response.ToList();
-        CountOfPost = enumerable.Count();
-        posts = enumerable.ToList();
+        try
+        {
+            var response = await PostService.GetPosts();
+            var enumerable = response.ToList();
+            CountOfPost = enumerable.Count();
+            posts = enumerable.ToList();
+
+        }
+        catch (Exception e)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Getting posts failed or there are none: " + e.Message);
+        }
     }
 
     // Create post method

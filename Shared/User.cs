@@ -12,6 +12,7 @@ public class User
 
     [Required(ErrorMessage = "Email is required")]
     [EmailAddress(ErrorMessage = "Invalid email address")]
+    [MaxLength(50)]
     public string Email { get; set; }
 
     [Required(ErrorMessage = "Domain is required")]

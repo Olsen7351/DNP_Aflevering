@@ -15,10 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserDao, USerEFDao>();
-builder.Services.AddScoped<IPostDao, PostEFDao>();
+builder.Services.AddScoped<IUserDao, UserDao>();
+builder.Services.AddScoped<IPostDao, PostDao>();
 builder.Services.AddScoped<IPostService, PostService>();
-builder.Services.AddDbContext<DNP_Context>();
 
 // Configuration for JWT authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

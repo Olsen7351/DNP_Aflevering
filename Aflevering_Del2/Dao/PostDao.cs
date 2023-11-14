@@ -6,7 +6,7 @@ using Shared.Dto;
 
 namespace Aflevering_Del1.Dao;
 
-public class PostDao
+public class PostDao : IPostDao
 {
     private readonly string PostFilePath; // Path to the JSON file for storing Posts
     private List<Post>? Posts;
@@ -70,7 +70,7 @@ public class PostDao
         return Task.CompletedTask;
     }
 
-    public Task CreatePost(Post post)
+    public Task CreatePost(PostDto post)
     {
         if (post == null)
         {

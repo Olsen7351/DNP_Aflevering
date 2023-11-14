@@ -5,7 +5,7 @@ using Shared;
 
 namespace Aflevering_Del1.Dao
 {
-    public class UserDao
+    public class UserDao : IUserDao
     {
         private readonly string usersFilePath; // Path to the JSON file for storing users
         private List<User>? users; 

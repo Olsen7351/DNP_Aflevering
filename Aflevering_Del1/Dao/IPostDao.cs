@@ -7,7 +7,7 @@ public interface IPostDao
 {
     Task<IEnumerable<Post>> GetPosts();
     Task<Post> GetPost(int id);
-    Task CreatePost(PostDto post);
+    Task CreatePost(Post post);
     Task DeletePost(int id);
     Task UpdatePost(Post post);
 }

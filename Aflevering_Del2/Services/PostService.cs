@@ -40,7 +40,7 @@ public class PostService : IPostService
         return PostDao.GetPosts();
     }
 
-    public Task CreatePost(Post post)
+    public Task CreatePost(PostDto post)
     {
         PostDao.CreatePost(post);
         return Task.CompletedTask;

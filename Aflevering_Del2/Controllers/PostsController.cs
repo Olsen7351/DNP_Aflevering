@@ -7,7 +7,7 @@ using Shared.Dto;
 
 namespace Aflevering_Del1.Controllers;
 
-//[Authorize]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class PostsController
@@ -32,7 +32,7 @@ public class PostsController
     }
     
     [HttpPost]
-    public async Task CreatePost(Post post)
+    public async Task CreatePost(PostDto post)
     {
         await _postService.CreatePost(post);
     }
